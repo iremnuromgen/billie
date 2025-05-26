@@ -1,0 +1,8 @@
+{
+    "@@locale": "en",
+    "appName": "Billie",
+    "onboardingFirstTitle": "Welcome to Billie!",
+    "onboardingFirstSubtitle": "Your money's new BFF 💸",
+    "onboardingFirstButtonText": "Next",
+    "onBoardingSkip": "Skip"
+}
