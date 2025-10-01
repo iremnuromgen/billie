@@ -3,6 +3,11 @@
     "appName": "Billie",
     "onboardingFirstTitle": "Welcome to Billie!",
     "onboardingFirstSubtitle": "Your money's new BFF 💸",
-    "onboardingFirstButtonText": "Next",
+    "onboardingSecondTitle": "All subscriptions, one spot!",
+    "onboardingSecondSubtitle": "Billie keeps track of which service you pay for and when, so you don’t have to.",
+    "onboardingThirdTitle": "Get payment reminders!",
+    "onboardingThirdSubtitle": "Billie notifies you about upcoming payments and helps you avoid surprise expenses.",
+    "onboardingFourthTitle": "See your spending at a glance!",
+    "onboardingFourthSubtitle": "Billie shows all your subscription costs on a single screen, making it easy to manage your budget.",
     "onBoardingSkip": "Skip"
 }

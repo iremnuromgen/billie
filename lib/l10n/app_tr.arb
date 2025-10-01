@@ -3,6 +3,11 @@
     "appName": "Billie",
     "onboardingFirstTitle": "Billie'ye Hoş Geldin!",
     "onboardingFirstSubtitle": "Paranın yeni en yakın dostu 💸",
-    "onboardingFirstButtonText": "Devam Et",
+    "onboardingSecondTitle": "Tüm aboneliklerin tek yerde!",
+    "onboardingSecondSubtitle": "Billie, hangi servise ne zaman ödeme yaptığını senin yerine takip eder.",
+    "onboardingThirdTitle": "Ödemelerini hatırlatır!",
+    "onboardingThirdSubtitle": "Billie, yaklaşan ödemelerini sana bildirir, sürpriz harcamaları önler.",
+    "onboardingFourthTitle": "Harcamalarını özetler!",
+    "onboardingFourthSubtitle": "Billie, tüm abonelik giderlerini tek ekranda gösterir ve bütçeni kolayca yönetmeni sağlar.",
     "onBoardingSkip": "Geç"
 }
