@@ -1,3 +1,4 @@
+import 'package:billie_app/core/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:billie_app/core/constants/app_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,7 +20,7 @@ class PageIndicatorRow extends StatelessWidget {
     final localization = AppLocalizations.of(context)!;
 
     return SizedBox(
-      height: 24,
+      height: AppSizes.lg,
       width: double.infinity,
       child: Stack(
         alignment: Alignment.center,

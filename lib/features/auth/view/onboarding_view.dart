@@ -78,18 +78,6 @@ class _OnboardingViewState extends State<OnboardingView> {
         children: [
           Container(color: AppColors.defaultBackground),
           const AnimatedBackgroundShapes(),
-
-          // Üstte indicator + skip
-          Positioned(
-            top: 40,
-            left: AppSizes.lg,
-            right: AppSizes.lg,
-            child: PageIndicatorRow(
-              currentPageIndex: _pageIndex,
-              totalPages: pages.length,
-              onSkip: _skip,
-            ),
-          ),
           // Sayfalar
           Positioned.fill(
             child: PageView.builder(
@@ -104,6 +92,9 @@ class _OnboardingViewState extends State<OnboardingView> {
                   subtitle: p["subtitle"]!,
                   onNext: _goNext,
                   titleFontSize: i == 0 ? 32 : 24,
+                  currentPageIndex: _pageIndex,
+                  totalPages: pages.length,
+                  onSkip: _skip,
                 );
               },
             ),

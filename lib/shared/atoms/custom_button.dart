@@ -1,3 +1,4 @@
+import 'package:billie_app/core/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:billie_app/core/constants/app_colors.dart';
 
@@ -92,7 +93,7 @@ class _CustomButtonState extends State<CustomButton> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(widget.icon, color: contentColor),
-          const SizedBox(width: 8),
+          const SizedBox(width: AppSizes.sm),
           Text(
             widget.text!,
             style: TextStyle(color: contentColor, fontSize: 16),
