@@ -27,17 +27,17 @@ class _OnboardingViewState extends State<OnboardingView> {
         "subtitle": loc.onboardingFirstSubtitle,
       },
       {
-        "image": null,
+        "image": "assets/images/onboarding-image-second.png",
         "title": loc.onboardingSecondTitle,
         "subtitle": loc.onboardingSecondSubtitle,
       },
       {
-        "image": null,
+        "image": "assets/images/onboarding-image-third.png",
         "title": loc.onboardingThirdTitle,
         "subtitle": loc.onboardingThirdSubtitle,
       },
       {
-        "image": null,
+        "image": "assets/images/onboarding-image-fourth.png",
         "title": loc.onboardingFourthTitle,
         "subtitle": loc.onboardingFourthSubtitle,
       },
@@ -78,27 +78,42 @@ class _OnboardingViewState extends State<OnboardingView> {
         children: [
           Container(color: AppColors.defaultBackground),
           const AnimatedBackgroundShapes(),
-          // Sayfalar
-          Positioned.fill(
-            child: PageView.builder(
-              controller: _controller,
-              itemCount: pages.length,
-              onPageChanged: (i) => setState(() => _pageIndex = i),
-              itemBuilder: (_, i) {
-                final p = pages[i];
-                return OnboardingPage(
-                  image: p["image"],
-                  title: p["title"]!,
-                  subtitle: p["subtitle"]!,
-                  onNext: _goNext,
-                  titleFontSize: i == 0 ? 32 : 24,
-                  currentPageIndex: _pageIndex,
-                  totalPages: pages.length,
-                  onSkip: _skip,
-                );
-              },
-            ),
-          ),
+
+          Column(
+            children: [
+              SizedBox(
+                height: 80,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg),
+                    child: PageIndicatorRow(
+                      currentPageIndex: _pageIndex,
+                      totalPages: pages.length,
+                      onSkip: _skip,
+                    ),
+                  ),
+                ),
+              ),
+              // Sayfalar
+              Expanded(
+                child: PageView.builder(
+                  controller: _controller,
+                  itemCount: pages.length,
+                  onPageChanged: (i) => setState(() => _pageIndex = i),
+                  itemBuilder: (_, i) {
+                    final p = pages[i];
+                    return OnboardingPage(
+                      image: p["image"],
+                      title: p["title"]!,
+                      subtitle: p["subtitle"]!,
+                      onNext: _goNext,
+                      titleFontSize: i == 0 ? 32 : 24,
+                    );
+                  },
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );
