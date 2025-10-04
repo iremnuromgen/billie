@@ -2,6 +2,7 @@ import 'package:billie_app/features/auth/view/onboarding_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:billie_app/core/router.dart';
 
 
 void main() {
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Billie',
       debugShowCheckedModeBanner: false,
-      home: OnboardingView(),
+      onGenerateRoute: AppRouter.generateRoute,
+      initialRoute: '/',
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

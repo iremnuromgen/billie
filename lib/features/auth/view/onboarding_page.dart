@@ -9,6 +9,7 @@ class OnboardingPage extends StatelessWidget {
   final String subtitle;
   final double titleFontSize;
   final VoidCallback onNext;
+  
 
   const OnboardingPage({
     super.key,

@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:billie_app/core/constants/app_colors.dart';
 import 'package:billie_app/core/constants/app_sizes.dart';
@@ -17,7 +18,6 @@ class _OnboardingViewState extends State<OnboardingView> {
   final PageController _controller = PageController();
   int _pageIndex = 0;
 
-  /// Localization kullanarak sayfa içeriklerini döndürüyoruz
   List<Map<String, String?>> get pages {
     final loc = AppLocalizations.of(context)!;
     return [
@@ -44,22 +44,14 @@ class _OnboardingViewState extends State<OnboardingView> {
     ];
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
   void _goNext() {
     if (_pageIndex < pages.length - 1) {
       _controller.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeOutCubic,
       );
     } else {
-      // Son sayfada → login veya home’a yönlendir
-      debugPrint("Onboarding tamamlandı → Login ekranına git");
-      // Navigator.pushReplacementNamed(context, '/login');
+      Navigator.pushReplacementNamed(context, '/login');
     }
   }
 
@@ -72,15 +64,22 @@ class _OnboardingViewState extends State<OnboardingView> {
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Stack(
         children: [
           Container(color: AppColors.defaultBackground),
-          const AnimatedBackgroundShapes(),
+          if (_pageIndex == 0) const AnimatedBackgroundShapes(),
 
           Column(
             children: [
+              // üst kısım: page indicator
               SizedBox(
                 height: 80,
                 child: Center(
@@ -94,26 +93,63 @@ class _OnboardingViewState extends State<OnboardingView> {
                   ),
                 ),
               ),
-              // Sayfalar
+
               Expanded(
                 child: PageView.builder(
                   controller: _controller,
                   itemCount: pages.length,
                   onPageChanged: (i) => setState(() => _pageIndex = i),
-                  itemBuilder: (_, i) {
-                    final p = pages[i];
-                    return OnboardingPage(
-                      image: p["image"],
-                      title: p["title"]!,
-                      subtitle: p["subtitle"]!,
-                      onNext: _goNext,
-                      titleFontSize: i == 0 ? 32 : 24,
+                  itemBuilder: (context, i) {
+                    return AnimatedBuilder(
+                      animation: _controller,
+                      builder: (context, child) {
+                        double page = 0;
+                        try {
+                          page = _controller.page ?? _controller.initialPage.toDouble();
+                        } catch (_) {
+                          page = _controller.initialPage.toDouble();
+                        }
+
+                        double delta = (page - i).abs();
+                        double scale = 1 - (delta * 0.15); // küçülme miktarı
+                        double blur = (delta * 8).clamp(0, 8); // blur miktarı
+
+                        return Transform.scale(
+                          scale: scale,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(24),
+                            child: Stack(
+                              fit: StackFit.expand,
+                              children: [
+                                child!,
+                                if (blur > 0)
+                                  BackdropFilter(
+                                    filter: ImageFilter.blur(
+                                      sigmaX: blur,
+                                      sigmaY: blur,
+                                    ),
+                                    child: Container(
+                                      color: Colors.black.withOpacity(0),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                      child: OnboardingPage(
+                        image: pages[i]["image"],
+                        title: pages[i]["title"]!,
+                        subtitle: pages[i]["subtitle"]!,
+                        onNext: _goNext,
+                        titleFontSize: i == 0 ? 32 : 24,
+                      ),
                     );
                   },
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
