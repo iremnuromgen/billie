@@ -56,11 +56,7 @@ class _OnboardingViewState extends State<OnboardingView> {
   }
 
   void _skip() {
-    _controller.animateToPage(
-      pages.length - 1,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeOut,
-    );
+    Navigator.pushReplacementNamed(context, '/login');
   }
 
   @override
