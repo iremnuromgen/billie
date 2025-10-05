@@ -9,5 +9,18 @@
     "onboardingThirdSubtitle": "Billie notifies you about upcoming payments and helps you avoid surprise expenses.",
     "onboardingFourthTitle": "See your spending at a glance!",
     "onboardingFourthSubtitle": "Billie shows all your subscription costs on a single screen, making it easy to manage your budget.",
+    "loginText": "Sign In",
+    "signupText": "Sign Up",
+    "loginWithGoogle": "Continue with Google",
+    "emailHint": "Email",
+    "passwordHint": "Password",
+    "orText": "or",
+    "forgotPassword": "Forgot password?",
+    "authNoAccount": "Don't have a Billie account?",
+    "authHaveAccount": "Already have a Billie account?",
+    "loginScreenTitle": "Welcome back, we missed you!",
+    "loginScreenSubtitle": "Log in to your account to keep managing your subscriptions.",
+    "signupScreenTitle": "Are you ready to manage your subscriptions?",
+    "signupScreenSubtitle": "Create your Billie account in just a few easy steps",
     "onBoardingSkip": "Skip"
 }

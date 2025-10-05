@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:billie_app/core/constants/app_colors.dart';
 import 'package:billie_app/core/constants/app_sizes.dart';
 import 'package:billie_app/shared/animations/animated_background_shapes.dart';
-import 'package:billie_app/shared/molecules/page_indicator_row.dart';
-import 'onboarding_page.dart';
+import 'package:billie_app/features/onboarding/widgets/page_indicator_row.dart';
+import '../widgets/onboarding_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OnboardingView extends StatefulWidget {

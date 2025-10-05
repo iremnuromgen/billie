@@ -9,5 +9,18 @@
     "onboardingThirdSubtitle": "Billie, yaklaşan ödemelerini sana bildirir, sürpriz harcamaları önler.",
     "onboardingFourthTitle": "Harcamalarını özetler!",
     "onboardingFourthSubtitle": "Billie, tüm abonelik giderlerini tek ekranda gösterir ve bütçeni kolayca yönetmeni sağlar.",
+    "loginText": "Giriş Yap",
+    "signupText": "Kayıt Ol",
+    "loginWithGoogle": "Google ile devam et",
+    "emailHint": "Email",
+    "passwordHint": "Şifre",
+    "orText": "ya da",
+    "forgotPassword": "Şifreni mi unuttun?",
+    "authNoAccount": "Billie hesabın yok mu?",
+    "authHaveAccount": "Zaten bir Billie hesabın var mı?",
+    "loginScreenTitle": "Hoş geldin, seni özledik!",
+    "loginScreenSubtitle": "Hesabına giriş yaparak aboneliklerini yönetmeye devam et.",
+    "signupScreenTitle": "Aboneliklerini yönetmeye hazır mısın?",
+    "signupScreenSubtitle": "Sadece birkaç basit adımda Billie hesabını oluştur.",
     "onBoardingSkip": "Geç"
 }

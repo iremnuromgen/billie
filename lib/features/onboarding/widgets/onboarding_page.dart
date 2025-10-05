@@ -43,7 +43,7 @@ class OnboardingPage extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
