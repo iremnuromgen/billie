@@ -1,3 +1,6 @@
+import 'package:billie_app/core/constants/app_colors.dart';
+import 'package:billie_app/shared/atoms/custom_button.dart';
+import 'package:billie_app/shared/atoms/custom_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:billie_app/core/constants/app_sizes.dart';
 import 'package:billie_app/shared/atoms/title_and_subtitle.dart';
@@ -12,11 +15,18 @@ class SignUpForm extends StatefulWidget {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
-  final _emailController = TextEditingController();
+  final _signupFullNameController = TextEditingController();
+  final _signupEmailController = TextEditingController();
+  final _signupPasswordController = TextEditingController();
+  final _signupConfirmPasswordController = TextEditingController();
+  bool _obscurePassword = true; //şifre gizli mi değil mi?
 
   @override
   void dispose() {
-    _emailController.dispose();
+    _signupEmailController.dispose();
+    _signupPasswordController.dispose();
+    _signupFullNameController.dispose();
+    _signupConfirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -39,7 +49,6 @@ class _SignUpFormState extends State<SignUpForm> {
                 fontSize: 24,
                 fontWeight: FontWeight.w600,
               ),
-              const SizedBox(height: AppSizes.sm),
               CustomText(
                 text: loc.signupScreenSubtitle,
                 fontSize: 16,
@@ -54,18 +63,115 @@ class _SignUpFormState extends State<SignUpForm> {
           alignment: Alignment.topCenter,
           child: Container(
             width: 320,
+            padding: const EdgeInsets.all(AppSizes.lg),
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 188, 120, 120),
+              color: Colors.grey.shade100,
               borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.10),
+                  blurRadius: 10,
+                  spreadRadius: 0,
+                ),
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.10),
+                  blurRadius: 25,
+                  offset: const Offset(0, 20),
+                ),
+              ]
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CustomTextField(
-                  controller: _emailController,
+                  controller: _signupFullNameController,
+                  hintText: loc.fullNameHint,
+                  prefixIcon: Icons.person,
+                ),
+                const SizedBox(height: AppSizes.md),
+                CustomTextField(
+                  controller: _signupEmailController,
                   hintText: loc.emailHint,
                   prefixIcon: Icons.email_outlined,
+                ),
+                const SizedBox(height: AppSizes.md),
+                CustomTextField(
+                  controller: _signupPasswordController,
+                  hintText: loc.passwordHint,
+                  prefixIcon: Icons.lock,
+                  obscureText: _obscurePassword,
+                  onToggleVisibility: () {
+                    setState(() {
+                      _obscurePassword = !_obscurePassword;
+                    });
+                  },
+                ),
+                const SizedBox(height: AppSizes.md),
+                CustomTextField(
+                  controller: _signupConfirmPasswordController,
+                  hintText: loc.passwordHint,
+                  prefixIcon: Icons.lock,
+                  obscureText: _obscurePassword,
+                  onToggleVisibility: () {
+                    setState(() {
+                      _obscurePassword = !_obscurePassword;
+                    });
+                  },
+                ),
+                const SizedBox(height: AppSizes.md),
+                CustomButton(
+                  height: 56,
+                  width: double.infinity,
+                  borderRadius: BorderRadius.circular(10),
+                  borderColor: AppColors.purple,
+                  text: loc.signupText,
+                  textStyle: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  color: AppColors.purple,
+                  onTap: () {
+                    print("giriş yapıldı");
+                  }
+                ),
+                const SizedBox(height: AppSizes.md),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Expanded(
+                      child: CustomDivider()
+                    ),
+                    CustomText(
+                      text: loc.orText,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    const Expanded(
+                      child: CustomDivider(),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: AppSizes.md),
+                CustomButton(
+                  height: 56,
+                  width: double.infinity,
+                  borderRadius: BorderRadius.circular(10),
+                  borderColor: const Color(0xFFE5E7EB),
+                  color: Colors.white,
+                  icon: Icons.g_mobiledata,
+                  iconColor: Color(0xFF4285F4),
+                  iconSize: 36, // Google ikonu
+                  text: loc.loginWithGoogle, // örn: “Continue with Google”
+                  textStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  onTap: () {
+                    print("Google ile giriş yapıldı");
+                  },
                 ),
               ],
             ),

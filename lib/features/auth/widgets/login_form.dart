@@ -1,5 +1,6 @@
 import 'package:billie_app/core/constants/app_colors.dart';
 import 'package:billie_app/shared/atoms/custom_button.dart';
+import 'package:billie_app/shared/atoms/custom_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:billie_app/core/constants/app_sizes.dart';
 import 'package:billie_app/shared/atoms/title_and_subtitle.dart';
@@ -14,14 +15,14 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _loginEmailController = TextEditingController();
+  final _loginPasswordController = TextEditingController();
   bool _obscurePassword = true; //şifre gizli mi değil mi?
 
   @override
   void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
+    _loginEmailController.dispose();
+    _loginPasswordController.dispose();
     super.dispose();
   }
 
@@ -80,13 +81,13 @@ class _LoginFormState extends State<LoginForm> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CustomTextField(
-                  controller: _emailController,
+                  controller: _loginEmailController,
                   hintText: loc.emailHint,
                   prefixIcon: Icons.email_outlined,
                 ),
                 const SizedBox(height: AppSizes.md),
                 CustomTextField(
-                  controller: _passwordController,
+                  controller: _loginPasswordController,
                   hintText: loc.passwordHint,
                   prefixIcon: Icons.lock,
                   obscureText: _obscurePassword,
@@ -132,12 +133,7 @@ class _LoginFormState extends State<LoginForm> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Expanded(
-                      child: Divider(
-                        thickness: 1,
-                        color: Color(0xFFD1D5DB), // açık gri
-                        indent: 10,
-                        endIndent: 10,
-                      ),
+                      child: CustomDivider()
                     ),
                     CustomText(
                       text: loc.orText,
@@ -145,12 +141,7 @@ class _LoginFormState extends State<LoginForm> {
                       fontWeight: FontWeight.bold,
                     ),
                     const Expanded(
-                      child: Divider(
-                        thickness: 1,
-                        color: Color(0xFFD1D5DB),
-                        indent: 10,
-                        endIndent: 10,
-                      ),
+                      child: CustomDivider()
                     ),
                   ],
                 ),
