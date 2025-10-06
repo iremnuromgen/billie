@@ -1,3 +1,4 @@
+import 'package:billie_app/shared/atoms/title_and_subtitle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -57,17 +58,14 @@ class AuthToggle extends StatelessWidget {
                   child: GestureDetector(
                     onTap: onLoginTap,
                     child: Center(
-                      child: Text(
-                        loc.loginText,
-                        style: TextStyle(
-                          color: isLogin
+                      child: CustomText(
+                        text: loc.loginText,
+                        fontSize: 16,
+                        textColor:  isLogin
                               ? Colors.black
                               : Colors.grey.shade600,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                          fontFamily: 'NunitoMedium',
-                        ),
-                      ),
+                        fontWeight: FontWeight.w600
+                      )
                     ),
                   ),
                 ),
@@ -77,17 +75,14 @@ class AuthToggle extends StatelessWidget {
                   child: GestureDetector(
                     onTap: onSignUpTap,
                     child: Center(
-                      child: Text(
-                        loc.signupText,
-                        style: TextStyle(
-                          color: !isLogin
+                      child: CustomText(
+                        text: loc.signupText,
+                        fontSize: 16,
+                        textColor:  !isLogin
                               ? Colors.black
                               : Colors.grey.shade600,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                          fontFamily: 'NunitoMedium',
-                        ),
-                      ),
+                        fontWeight: FontWeight.w600
+                      )
                     ),
                   ),
                 ),

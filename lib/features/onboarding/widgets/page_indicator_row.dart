@@ -1,4 +1,5 @@
 import 'package:billie_app/core/constants/app_sizes.dart';
+import 'package:billie_app/shared/atoms/title_and_subtitle.dart';
 import 'package:flutter/material.dart';
 import 'package:billie_app/core/constants/app_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -70,23 +71,19 @@ class _PageIndicatorRowState extends State<PageIndicatorRow> {
               child: AnimatedOpacity(
                 opacity: _isPressed ? 0.5 : 1.0,
                 duration: const Duration(milliseconds: 120),
-                child: Text(
-                  localization.onBoardingSkip,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'NunitoMedium',
-                    color: AppColors.purple.withOpacity(0.7),
-                    fontWeight: FontWeight.w500,
-                    decoration: TextDecoration.none,
-                    shadows: const [
-                      Shadow(
-                        offset: Offset(0, 4),
-                        blurRadius: 12,
-                        color: Colors.black26,
-                      ),
-                    ],
-                  ),
-                ),
+                child: CustomText(
+                  text: localization.onBoardingSkip,
+                  fontSize: 16,
+                  textColor: AppColors.purple.withOpacity(0.7),
+                  fontWeight: FontWeight.w500,
+                   shadows: const [
+                    Shadow(
+                      offset: Offset(0, 4),
+                      blurRadius: 12,
+                      color: Colors.black26,
+                    ),
+                  ],
+                )
               ),
             ),
           ),

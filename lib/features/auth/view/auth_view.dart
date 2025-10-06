@@ -69,7 +69,8 @@ class _AuthViewState extends State<AuthView> {
                           : loc.authHaveAccount,
                       style: TextStyle(
                         color: Colors.grey.shade700,
-                        fontSize: 15,
+                        fontFamily: 'NunitoMedium',
+                        fontSize: 16,
                       ),
                       children: [
                         TextSpan(

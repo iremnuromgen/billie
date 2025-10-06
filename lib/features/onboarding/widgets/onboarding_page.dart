@@ -53,7 +53,7 @@ class OnboardingPage extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                   const SizedBox(height: 8),
-                  CustomSubtitle(text: subtitle, fontSize: 16),
+                  CustomText(text: subtitle, fontSize: 16),
                 ],
               ),
             ),

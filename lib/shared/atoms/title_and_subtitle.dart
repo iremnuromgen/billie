@@ -33,14 +33,20 @@ class CustomTitle extends StatelessWidget {
   }
 }
 
-class CustomSubtitle extends StatelessWidget {
+class CustomText extends StatelessWidget {
   final String text;
   final double fontSize;
+  final Color textColor;
+  final FontWeight? fontWeight;
+  final List<Shadow>? shadows;
 
-  const CustomSubtitle({
+  const CustomText({
     Key? key,
     required this.text,
-    required this.fontSize
+    required this.fontSize,
+    this.shadows,
+    this.fontWeight,
+    this.textColor = AppColors.defaultSubtitleColor,
   }) : super(key: key);
 
   @override
@@ -55,7 +61,9 @@ class CustomSubtitle extends StatelessWidget {
         fontFamily: 'NunitoMedium',
         decoration: TextDecoration.none,
         fontSize: fontSize,
-        color: AppColors.defaultSubtitleColor,
+        fontWeight: fontWeight,
+        color: textColor,
+        shadows: shadows
       ),
     );
   }
