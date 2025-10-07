@@ -1,11 +1,17 @@
-import 'package:billie_app/features/onboarding/view/onboarding_view.dart';
+import 'package:billie_app/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:billie_app/core/router.dart';
 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  print("Firebase başarıyla initialize edildi!");
   runApp(const MyApp());
 }
 
