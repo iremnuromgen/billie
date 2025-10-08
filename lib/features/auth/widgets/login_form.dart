@@ -125,7 +125,7 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                   color: AppColors.purple,
                   onTap: () {
-                    print("giriş yapıldı");
+                    Navigator.pushReplacementNamed(context, '/dashboard');
                   }
                 ),
                 const SizedBox(height: AppSizes.md),
