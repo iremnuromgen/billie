@@ -6,6 +6,8 @@ class CustomTextField extends StatelessWidget {
   final IconData prefixIcon;
   final bool obscureText;
   final VoidCallback? onToggleVisibility;
+  final ValueChanged<String>? onChanged;
+  final VoidCallback? onTap;
 
   const CustomTextField({
     super.key,
@@ -14,6 +16,8 @@ class CustomTextField extends StatelessWidget {
     required this.prefixIcon,
     this.obscureText = false,
     this.onToggleVisibility,
+    this.onChanged,
+    this.onTap,
   });
 
   @override
@@ -23,6 +27,8 @@ class CustomTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         obscureText: obscureText,
+        onChanged: onChanged,
+        onTap: onTap,
         decoration: InputDecoration(
           prefixIcon: Icon(prefixIcon),
           hintText: hintText,
@@ -35,6 +41,10 @@ class CustomTextField extends StatelessWidget {
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(color: Color(0xFFE5E7EB), width: 2.0),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: Color(0xFF6A11CB), width: 2.0),
           ),
           suffixIcon: onToggleVisibility != null
               ? IconButton(

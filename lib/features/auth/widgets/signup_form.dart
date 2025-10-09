@@ -1,6 +1,8 @@
 import 'package:billie_app/core/constants/app_colors.dart';
+import 'package:billie_app/features/auth/widgets/password_requirements_box.dart';
 import 'package:billie_app/shared/atoms/custom_button.dart';
 import 'package:billie_app/shared/atoms/custom_divider.dart';
+import 'package:billie_app/shared/molecules/password_strength_meter.dart';
 import 'package:flutter/material.dart';
 import 'package:billie_app/core/constants/app_sizes.dart';
 import 'package:billie_app/shared/atoms/title_and_subtitle.dart';
@@ -19,6 +21,8 @@ class _SignUpFormState extends State<SignUpForm> {
   final _signupEmailController = TextEditingController();
   final _signupPasswordController = TextEditingController();
   final _signupConfirmPasswordController = TextEditingController();
+  bool _showPasswordRequirements = false;
+String _currentPassword = "";
   bool _obscurePassword = true; //şifre gizli mi değil mi?
 
   @override
@@ -101,12 +105,28 @@ class _SignUpFormState extends State<SignUpForm> {
                   hintText: loc.passwordHint,
                   prefixIcon: Icons.lock,
                   obscureText: _obscurePassword,
+                  onChanged: (value) {
+                    setState(() {
+                      _currentPassword = value;
+                    });
+                  },
+                  onTap: () {
+                    setState(() {
+                      _showPasswordRequirements = true;
+                    });
+                  },
                   onToggleVisibility: () {
                     setState(() {
                       _obscurePassword = !_obscurePassword;
                     });
                   },
                 ),
+                if (_showPasswordRequirements) ...[
+                  const SizedBox(height: 8),
+                  PasswordRequirementsBox(password: _currentPassword),
+                  const SizedBox(height: 12),
+                  PasswordStrengthMeter(password: _currentPassword),
+                ],
                 const SizedBox(height: AppSizes.md),
                 CustomTextField(
                   controller: _signupConfirmPasswordController,
