@@ -22,7 +22,7 @@
     "authHaveAccount": "Already have a Billie account?",
     "loginScreenTitle": "Welcome back, we missed you!",
     "loginScreenSubtitle": "Log in to your account to keep managing your subscriptions.",
-    "signupScreenTitle": "Are you ready to manage your subscriptions?",
+    "signupScreenTitle": "Manage your subscriptions!",
     "signupScreenSubtitle": "Create your Billie account in just a few easy steps",
     "onBoardingSkip": "Skip"
 }

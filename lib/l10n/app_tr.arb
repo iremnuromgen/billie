@@ -22,7 +22,7 @@
     "authHaveAccount": "Zaten bir Billie hesabın var mı?",
     "loginScreenTitle": "Hoş geldin, seni özledik!",
     "loginScreenSubtitle": "Hesabına giriş yaparak aboneliklerini yönetmeye devam et.",
-    "signupScreenTitle": "Aboneliklerini yönetmeye hazır mısın?",
+    "signupScreenTitle": "Aboneliklerini yönet!",
     "signupScreenSubtitle": "Sadece birkaç basit adımda Billie hesabını oluştur.",
     "onBoardingSkip": "Geç"
 }

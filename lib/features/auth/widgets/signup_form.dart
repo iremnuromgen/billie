@@ -2,7 +2,6 @@ import 'package:billie_app/core/constants/app_colors.dart';
 import 'package:billie_app/features/auth/widgets/password_requirements_box.dart';
 import 'package:billie_app/shared/atoms/custom_button.dart';
 import 'package:billie_app/shared/atoms/custom_divider.dart';
-import 'package:billie_app/shared/molecules/password_strength_meter.dart';
 import 'package:flutter/material.dart';
 import 'package:billie_app/core/constants/app_sizes.dart';
 import 'package:billie_app/shared/atoms/title_and_subtitle.dart';
@@ -21,8 +20,9 @@ class _SignUpFormState extends State<SignUpForm> {
   final _signupEmailController = TextEditingController();
   final _signupPasswordController = TextEditingController();
   final _signupConfirmPasswordController = TextEditingController();
+
   bool _showPasswordRequirements = false;
-String _currentPassword = "";
+  String _currentPassword = "";
   bool _obscurePassword = true; //şifre gizli mi değil mi?
 
   @override
@@ -92,12 +92,22 @@ String _currentPassword = "";
                   controller: _signupFullNameController,
                   hintText: loc.fullNameHint,
                   prefixIcon: Icons.person,
+                  onTap: () {
+                    setState(() {
+                      _showPasswordRequirements = false;
+                    });
+                  },
                 ),
                 const SizedBox(height: AppSizes.md),
                 CustomTextField(
                   controller: _signupEmailController,
                   hintText: loc.emailHint,
                   prefixIcon: Icons.email_outlined,
+                  onTap: () {
+                    setState(() {
+                      _showPasswordRequirements = false;
+                    });
+                  },
                 ),
                 const SizedBox(height: AppSizes.md),
                 CustomTextField(
@@ -122,17 +132,20 @@ String _currentPassword = "";
                   },
                 ),
                 if (_showPasswordRequirements) ...[
-                  const SizedBox(height: 8),
+                  SizedBox(height: AppSizes.sm),
                   PasswordRequirementsBox(password: _currentPassword),
-                  const SizedBox(height: 12),
-                  PasswordStrengthMeter(password: _currentPassword),
                 ],
-                const SizedBox(height: AppSizes.md),
+                SizedBox(height: _showPasswordRequirements ? AppSizes.sm : AppSizes.md),
                 CustomTextField(
                   controller: _signupConfirmPasswordController,
                   hintText: loc.passwordHint,
                   prefixIcon: Icons.lock,
                   obscureText: _obscurePassword,
+                  onTap: () {
+                    setState(() {
+                      _showPasswordRequirements = false;
+                    });
+                  },
                   onToggleVisibility: () {
                     setState(() {
                       _obscurePassword = !_obscurePassword;

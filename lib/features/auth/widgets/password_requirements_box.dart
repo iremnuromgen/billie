@@ -40,14 +40,14 @@ class PasswordRequirementsBox extends StatelessWidget {
         Icon(
           passed ? Icons.check_circle : Icons.radio_button_unchecked,
           color: passed ? Colors.green : Colors.grey,
-          size: 18,
+          size: 10,
         ),
         const SizedBox(width: 8),
         Text(
           text,
           style: TextStyle(
             color: passed ? Colors.green.shade800 : Colors.grey.shade700,
-            fontSize: 13,
+            fontSize: 10,
           ),
         ),
       ],
