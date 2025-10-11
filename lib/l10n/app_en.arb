@@ -24,5 +24,6 @@
     "loginScreenSubtitle": "Log in to your account to keep managing your subscriptions.",
     "signupScreenTitle": "Manage your subscriptions!",
     "signupScreenSubtitle": "Create your Billie account in just a few easy steps",
-    "onBoardingSkip": "Skip"
+    "onBoardingSkip": "Skip",
+    "passwordsDoNotMatch": "Passwords do not match!"
 }

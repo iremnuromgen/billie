@@ -21,9 +21,24 @@ class _SignUpFormState extends State<SignUpForm> {
   final _signupPasswordController = TextEditingController();
   final _signupConfirmPasswordController = TextEditingController();
 
+  final FocusNode _confirmPasswordFocus = FocusNode();
+
   bool _showPasswordRequirements = false;
   String _currentPassword = "";
   bool _obscurePassword = true; //şifre gizli mi değil mi?
+  String? _passwordError; // 👈 hata mesajı için
+  bool _isConfirmFocused = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _confirmPasswordFocus.addListener(() {
+      setState(() {
+        _isConfirmFocused = _confirmPasswordFocus.hasFocus;
+      });
+      _validatePasswords();
+    });
+  }
 
   @override
   void dispose() {
@@ -31,7 +46,21 @@ class _SignUpFormState extends State<SignUpForm> {
     _signupPasswordController.dispose();
     _signupFullNameController.dispose();
     _signupConfirmPasswordController.dispose();
+    _confirmPasswordFocus.dispose();
     super.dispose();
+  }
+
+  void _validatePasswords() {
+    final password = _signupPasswordController.text.trim();
+    final confirm = _signupConfirmPasswordController.text.trim();
+
+    setState(() {
+      if (confirm.isNotEmpty && password != confirm) {
+        _passwordError = AppLocalizations.of(context)!.passwordsDoNotMatch;
+      } else {
+        _passwordError = null;
+      }
+    });
   }
 
   @override
@@ -82,7 +111,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   blurRadius: 25,
                   offset: const Offset(0, 20),
                 ),
-              ]
+              ],
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -119,6 +148,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     setState(() {
                       _currentPassword = value;
                     });
+                    _validatePasswords();
                   },
                   onTap: () {
                     setState(() {
@@ -136,54 +166,62 @@ class _SignUpFormState extends State<SignUpForm> {
                   PasswordRequirementsBox(password: _currentPassword),
                 ],
                 SizedBox(height: _showPasswordRequirements ? AppSizes.sm : AppSizes.md),
-                CustomTextField(
-                  controller: _signupConfirmPasswordController,
-                  hintText: loc.passwordHint,
-                  prefixIcon: Icons.lock,
-                  obscureText: _obscurePassword,
-                  onTap: () {
-                    setState(() {
-                      _showPasswordRequirements = false;
-                    });
-                  },
-                  onToggleVisibility: () {
-                    setState(() {
-                      _obscurePassword = !_obscurePassword;
-                    });
-                  },
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomTextField(
+                      controller: _signupConfirmPasswordController,
+                      focusNode: _confirmPasswordFocus,
+                      hintText: loc.confirmPasswordHint,
+                      prefixIcon: Icons.lock,
+                      onChanged: (_) => _validatePasswords(),
+                      onTap: () {
+                        setState(() {
+                          _showPasswordRequirements = false;
+                        });
+                      },
+                    ),
+                    if (_isConfirmFocused && _passwordError != null) ...[
+                      const SizedBox(height: AppSizes.xs),
+                      CustomText(
+                        text: _passwordError!,
+                        fontSize: 13,
+                        textColor: Colors.red,
+                      )
+                    ],
+                  ],
                 ),
-                const SizedBox(height: AppSizes.md),
+                SizedBox(height: _isConfirmFocused && _passwordError != null ? AppSizes.xs : AppSizes.md),
                 CustomButton(
                   height: 56,
                   width: double.infinity,
                   borderRadius: BorderRadius.circular(10),
                   borderColor: AppColors.purple,
                   text: loc.signupText,
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                   color: AppColors.purple,
                   onTap: () {
-                    print("giriş yapıldı");
-                  }
+                    _validatePasswords();
+                    if (_passwordError == null) {
+                      print("Kayıt başarılı");
+                    }
+                  },
                 ),
                 const SizedBox(height: AppSizes.md),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Expanded(
-                      child: CustomDivider()
-                    ),
+                    const Expanded(child: CustomDivider()),
                     CustomText(
                       text: loc.orText,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
-                    const Expanded(
-                      child: CustomDivider(),
-                    ),
+                    const Expanded(child: CustomDivider()),
                   ],
                 ),
                 const SizedBox(height: AppSizes.md),
@@ -194,9 +232,9 @@ class _SignUpFormState extends State<SignUpForm> {
                   borderColor: const Color(0xFFE5E7EB),
                   color: Colors.white,
                   icon: Icons.g_mobiledata,
-                  iconColor: Color(0xFF4285F4),
-                  iconSize: 36, // Google ikonu
-                  text: loc.loginWithGoogle, // örn: “Continue with Google”
+                  iconColor: const Color(0xFF4285F4),
+                  iconSize: 36,
+                  text: loc.loginWithGoogle,
                   textStyle: const TextStyle(
                     color: Colors.black,
                     fontSize: 16,

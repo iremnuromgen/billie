@@ -8,6 +8,7 @@ class CustomTextField extends StatelessWidget {
   final VoidCallback? onToggleVisibility;
   final ValueChanged<String>? onChanged;
   final VoidCallback? onTap;
+  final FocusNode? focusNode;
 
   const CustomTextField({
     super.key,
@@ -18,6 +19,7 @@ class CustomTextField extends StatelessWidget {
     this.onToggleVisibility,
     this.onChanged,
     this.onTap,
+    this.focusNode,
   });
 
   @override
@@ -26,6 +28,7 @@ class CustomTextField extends StatelessWidget {
       height: 56,
       child: TextField(
         controller: controller,
+        focusNode: focusNode,
         obscureText: obscureText,
         onChanged: onChanged,
         onTap: onTap,

@@ -24,5 +24,6 @@
     "loginScreenSubtitle": "Hesabına giriş yaparak aboneliklerini yönetmeye devam et.",
     "signupScreenTitle": "Aboneliklerini yönet!",
     "signupScreenSubtitle": "Sadece birkaç basit adımda Billie hesabını oluştur.",
-    "onBoardingSkip": "Geç"
+    "onBoardingSkip": "Geç",
+    "passwordsDoNotMatch": "Şifreler eşleşmiyor!"
 }
