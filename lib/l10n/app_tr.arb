@@ -25,5 +25,6 @@
     "signupScreenTitle": "Aboneliklerini yönet!",
     "signupScreenSubtitle": "Sadece birkaç basit adımda Billie hesabını oluştur.",
     "onBoardingSkip": "Geç",
-    "passwordsDoNotMatch": "Şifreler eşleşmiyor!"
+    "passwordsDoNotMatch": "Şifreler eşleşmiyor!",
+    "requiredFieldError": "Bu alan boş bırakılamaz!"
 }

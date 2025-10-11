@@ -25,5 +25,6 @@
     "signupScreenTitle": "Manage your subscriptions!",
     "signupScreenSubtitle": "Create your Billie account in just a few easy steps",
     "onBoardingSkip": "Skip",
-    "passwordsDoNotMatch": "Passwords do not match!"
+    "passwordsDoNotMatch": "Passwords do not match!",
+    "requiredFieldError": "This field cannot be empty!"
 }

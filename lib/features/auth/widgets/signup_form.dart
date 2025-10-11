@@ -26,8 +26,13 @@ class _SignUpFormState extends State<SignUpForm> {
   bool _showPasswordRequirements = false;
   String _currentPassword = "";
   bool _obscurePassword = true; //şifre gizli mi değil mi?
-  String? _passwordError; // 👈 hata mesajı için
+  String? _passwordError;
   bool _isConfirmFocused = false;
+
+  String? _emptyFullNameError;
+  String? _emptyEmailError;
+  String? _emptyPasswordError;
+  String? _emptyConfirmError;
 
   @override
   void initState() {
@@ -62,6 +67,36 @@ class _SignUpFormState extends State<SignUpForm> {
       }
     });
   }
+
+  bool _validateForm() {
+    final loc = AppLocalizations.of(context)!;
+    bool isValid = true;
+
+    setState(() {
+      _emptyFullNameError = _signupFullNameController.text.trim().isEmpty
+          ? loc.requiredFieldError
+          : null;
+      _emptyEmailError = _signupEmailController.text.trim().isEmpty
+          ? loc.requiredFieldError
+          : null;
+      _emptyPasswordError = _signupPasswordController.text.trim().isEmpty
+          ? loc.requiredFieldError
+          : null;
+      _emptyConfirmError = _signupConfirmPasswordController.text.trim().isEmpty
+          ? loc.requiredFieldError
+          : _emptyConfirmError;
+
+      if (_emptyFullNameError != null ||
+          _emptyEmailError != null ||
+          _emptyPasswordError != null ||
+          _emptyConfirmError != null) {
+        isValid = false;
+      }
+    });
+
+    return isValid;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -117,6 +152,7 @@ class _SignUpFormState extends State<SignUpForm> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                //*Full Name
                 CustomTextField(
                   controller: _signupFullNameController,
                   hintText: loc.fullNameHint,
@@ -125,9 +161,27 @@ class _SignUpFormState extends State<SignUpForm> {
                     setState(() {
                       _showPasswordRequirements = false;
                     });
+                    if (_emptyFullNameError != null) _emptyFullNameError = null;
+                  },
+                  onChanged: (_) {
+                    if (_emptyFullNameError != null) {
+                      setState(() => _emptyFullNameError = null);
+                    }
                   },
                 ),
-                const SizedBox(height: AppSizes.md),
+                if (_emptyFullNameError != null) ...[
+                  const SizedBox(height: AppSizes.xs),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: CustomText(
+                      text: _emptyFullNameError!,
+                      fontSize: 13,
+                      textColor: Colors.red,
+                    ),
+                  ),
+                ],
+                SizedBox(height: _emptyFullNameError != null ? AppSizes.xs : AppSizes.md),
+                //* Email
                 CustomTextField(
                   controller: _signupEmailController,
                   hintText: loc.emailHint,
@@ -136,9 +190,27 @@ class _SignUpFormState extends State<SignUpForm> {
                     setState(() {
                       _showPasswordRequirements = false;
                     });
+                    if (_emptyEmailError != null) _emptyEmailError = null;
+                  },
+                  onChanged: (_) {
+                    if (_emptyEmailError != null) {
+                      setState(() => _emptyEmailError = null);
+                    }
                   },
                 ),
-                const SizedBox(height: AppSizes.md),
+                if (_emptyEmailError != null) ...[
+                  const SizedBox(height: AppSizes.xs),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: CustomText(
+                      text: _emptyEmailError!,
+                      fontSize: 13,
+                      textColor: Colors.red,
+                    ),
+                  ),
+                ],
+                SizedBox(height: _emptyEmailError != null ? AppSizes.xs : AppSizes.md),
+                //*Password
                 CustomTextField(
                   controller: _signupPasswordController,
                   hintText: loc.passwordHint,
@@ -149,11 +221,15 @@ class _SignUpFormState extends State<SignUpForm> {
                       _currentPassword = value;
                     });
                     _validatePasswords();
+                    if (_emptyPasswordError != null) {
+                      setState(() => _emptyPasswordError = null);
+                    }
                   },
                   onTap: () {
                     setState(() {
                       _showPasswordRequirements = true;
                     });
+                    if (_emptyPasswordError != null) _emptyPasswordError = null;
                   },
                   onToggleVisibility: () {
                     setState(() {
@@ -161,11 +237,23 @@ class _SignUpFormState extends State<SignUpForm> {
                     });
                   },
                 ),
+                if (_emptyPasswordError != null) ...[
+                  const SizedBox(height: AppSizes.xs),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: CustomText(
+                      text: _emptyPasswordError!,
+                      fontSize: 13,
+                      textColor: Colors.red,
+                    ),
+                  ),
+                ],
                 if (_showPasswordRequirements) ...[
-                  SizedBox(height: AppSizes.sm),
+                  SizedBox(height: AppSizes.xs),
                   PasswordRequirementsBox(password: _currentPassword),
                 ],
-                SizedBox(height: _showPasswordRequirements ? AppSizes.sm : AppSizes.md),
+                SizedBox(height: _showPasswordRequirements || _emptyPasswordError != null ? AppSizes.xs : AppSizes.md),
+                //*confirm password
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -174,13 +262,23 @@ class _SignUpFormState extends State<SignUpForm> {
                       focusNode: _confirmPasswordFocus,
                       hintText: loc.confirmPasswordHint,
                       prefixIcon: Icons.lock,
+                      obscureText: true,
                       onChanged: (_) => _validatePasswords(),
                       onTap: () {
                         setState(() {
                           _showPasswordRequirements = false;
                         });
+                        if (_emptyConfirmError != null) _emptyConfirmError = null;
                       },
                     ),
+                    if (_emptyConfirmError != null) ...[
+                      const SizedBox(height: AppSizes.xs),
+                      CustomText(
+                        text: _emptyConfirmError!,
+                        fontSize: 13,
+                        textColor: Colors.red,
+                      ),
+                    ],
                     if (_isConfirmFocused && _passwordError != null) ...[
                       const SizedBox(height: AppSizes.xs),
                       CustomText(
@@ -191,7 +289,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     ],
                   ],
                 ),
-                SizedBox(height: _isConfirmFocused && _passwordError != null ? AppSizes.xs : AppSizes.md),
+                SizedBox(height: (_isConfirmFocused && _passwordError != null) || _emptyConfirmError != null ? AppSizes.xs : AppSizes.md),
                 CustomButton(
                   height: 56,
                   width: double.infinity,
@@ -205,9 +303,13 @@ class _SignUpFormState extends State<SignUpForm> {
                   ),
                   color: AppColors.purple,
                   onTap: () {
+                    final isFormValid = _validateForm();
                     _validatePasswords();
-                    if (_passwordError == null) {
-                      print("Kayıt başarılı");
+
+                    if (isFormValid && _passwordError == null) {
+                      print("✅ Kayıt başarılı");
+                    } else {
+                      print("⚠️ Form geçersiz");
                     }
                   },
                 ),

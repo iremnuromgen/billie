@@ -62,7 +62,7 @@ class _AuthViewState extends State<AuthView> {
               ),
               //yönlendirme
               SizedBox(
-                height: 80,
+                height: 60,
                 child: Center(
                   child: GestureDetector(
                     onTap: () => setState(() => _isLogin = !_isLogin),
