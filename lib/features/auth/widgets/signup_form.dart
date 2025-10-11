@@ -1,12 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:billie_app/core/constants/app_colors.dart';
 import 'package:billie_app/features/auth/widgets/password_requirements_box.dart';
 import 'package:billie_app/shared/atoms/custom_button.dart';
 import 'package:billie_app/shared/atoms/custom_divider.dart';
-import 'package:flutter/material.dart';
 import 'package:billie_app/core/constants/app_sizes.dart';
 import 'package:billie_app/shared/atoms/title_and_subtitle.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:billie_app/shared/atoms/custom_text_field.dart';
+import 'package:billie_app/shared/utils/validators.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
@@ -33,6 +34,9 @@ class _SignUpFormState extends State<SignUpForm> {
   String? _emptyEmailError;
   String? _emptyPasswordError;
   String? _emptyConfirmError;
+
+  String? _invalidEmailError;
+
 
   @override
   void initState() {
@@ -85,6 +89,14 @@ class _SignUpFormState extends State<SignUpForm> {
       _emptyConfirmError = _signupConfirmPasswordController.text.trim().isEmpty
           ? loc.requiredFieldError
           : _emptyConfirmError;
+          
+      if (_emptyEmailError == null && !Validators.isValidEmail(_signupEmailController.text)) 
+      {
+        _invalidEmailError = loc.invalidEmailError;
+        isValid = false;
+      } else {
+        _invalidEmailError = null;
+      }
 
       if (_emptyFullNameError != null ||
           _emptyEmailError != null ||
@@ -196,6 +208,9 @@ class _SignUpFormState extends State<SignUpForm> {
                     if (_emptyEmailError != null) {
                       setState(() => _emptyEmailError = null);
                     }
+                    if (_invalidEmailError != null) {
+                      setState(() => _invalidEmailError = null);
+                    }
                   },
                 ),
                 if (_emptyEmailError != null) ...[
@@ -209,7 +224,18 @@ class _SignUpFormState extends State<SignUpForm> {
                     ),
                   ),
                 ],
-                SizedBox(height: _emptyEmailError != null ? AppSizes.xs : AppSizes.md),
+                if (_invalidEmailError != null) ...[
+                  const SizedBox(height: AppSizes.xs),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: CustomText(
+                      text: _invalidEmailError!,
+                      fontSize: 13,
+                      textColor: Colors.red,
+                    ),
+                  ),
+                ],
+                SizedBox(height: _emptyEmailError != null || _invalidEmailError != null ? AppSizes.xs : AppSizes.md),
                 //*Password
                 CustomTextField(
                   controller: _signupPasswordController,

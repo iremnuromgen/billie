@@ -26,5 +26,6 @@
     "signupScreenSubtitle": "Sadece birkaç basit adımda Billie hesabını oluştur.",
     "onBoardingSkip": "Geç",
     "passwordsDoNotMatch": "Şifreler eşleşmiyor!",
-    "requiredFieldError": "Bu alan boş bırakılamaz!"
+    "requiredFieldError": "Bu alan boş bırakılamaz!",
+    "invalidEmailError": "Geçerli bir e-posta adresi girin"
 }

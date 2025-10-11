@@ -26,5 +26,6 @@
     "signupScreenSubtitle": "Create your Billie account in just a few easy steps",
     "onBoardingSkip": "Skip",
     "passwordsDoNotMatch": "Passwords do not match!",
-    "requiredFieldError": "This field cannot be empty!"
+    "requiredFieldError": "This field cannot be empty!",
+    "invalidEmailError": "Please enter a valid email address"
 }
