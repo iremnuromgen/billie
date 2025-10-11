@@ -20,74 +20,81 @@ class _AuthViewState extends State<AuthView> {
     final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.defaultBackground,
       body: SafeArea(
-        child: Column(
-          children: [
-            //Toggle
-            SizedBox(
-              height: 100,
-              child: Center(
-                child: AuthToggle(
-                  isLogin: _isLogin,
-                  onLoginTap: () => setState(() => _isLogin = true),
-                  onSignUpTap: () => setState(() => _isLogin = false),
-                ),
-              ),
-            ),
-            //Form
-            Expanded(
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
-                transitionBuilder: (child, anim) => FadeTransition(
-                  opacity: anim,
-                  child: SlideTransition(
-                    position: Tween<Offset>(
-                      begin: const Offset(0.1, 0),
-                      end: Offset.zero,
-                    ).animate(anim),
-                    child: child,
+        child: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child: Column(
+            children: [
+              //Toggle
+              SizedBox(
+                height: 100,
+                child: Center(
+                  child: AuthToggle(
+                    isLogin: _isLogin,
+                    onLoginTap: () => setState(() => _isLogin = true),
+                    onSignUpTap: () => setState(() => _isLogin = false),
                   ),
                 ),
-                child: _isLogin
-                    ? const LoginForm(key: ValueKey('login'))
-                    : const SignUpForm(key: ValueKey('signup')),
               ),
-            ),
-            //yönlendirme
-            SizedBox(
-              height: 80,
-              child: Center(
-                child: GestureDetector(
-                  onTap: () => setState(() => _isLogin = !_isLogin),
-                  child: Text.rich(
-                    TextSpan(
-                      text: _isLogin
-                          ? loc.authNoAccount
-                          : loc.authHaveAccount,
-                      style: TextStyle(
-                        color: Colors.grey.shade700,
-                        fontFamily: 'NunitoMedium',
-                        fontSize: 16,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: _isLogin
-                              ? " ${loc.signupText}"
-                              : " ${loc.loginText}",
-                          style: TextStyle(
-                            color: AppColors.purple,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
+              //Form
+              Expanded(
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  transitionBuilder: (child, anim) => FadeTransition(
+                    opacity: anim,
+                    child: SlideTransition(
+                      position: Tween<Offset>(
+                        begin: const Offset(0.1, 0),
+                        end: Offset.zero,
+                      ).animate(anim),
+                      child: child,
                     ),
-                    textAlign: TextAlign.center,
+                  ),
+                  child: _isLogin
+                      ? const LoginForm(key: ValueKey('login'))
+                      : const SignUpForm(key: ValueKey('signup')),
+                ),
+              ),
+              //yönlendirme
+              SizedBox(
+                height: 80,
+                child: Center(
+                  child: GestureDetector(
+                    onTap: () => setState(() => _isLogin = !_isLogin),
+                    child: Text.rich(
+                      TextSpan(
+                        text: _isLogin
+                            ? loc.authNoAccount
+                            : loc.authHaveAccount,
+                        style: TextStyle(
+                          color: Colors.grey.shade700,
+                          fontFamily: 'NunitoMedium',
+                          fontSize: 16,
+                        ),
+                        children: [
+                          TextSpan(
+                            text: _isLogin
+                                ? " ${loc.signupText}"
+                                : " ${loc.loginText}",
+                            style: TextStyle(
+                              color: AppColors.purple,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
