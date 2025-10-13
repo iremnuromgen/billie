@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:billie_app/features/home/view/dashboard_view.dart';
 import 'package:billie_app/features/onboarding/view/onboarding_view.dart';
-import 'package:flutter/material.dart';
 import 'package:billie_app/features/auth/view/auth_view.dart';
 
-
+//*Sayfa yönlendirmeleri
 class AppRouter {
+  //*RouteSettings class'ı sayfa geçişinde taşınan bilgiyi tutar.(settings.name, settings.arguments)
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
