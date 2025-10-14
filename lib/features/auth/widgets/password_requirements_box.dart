@@ -1,4 +1,4 @@
-//şifre şartları kutusu
+//şifre şartları
 import 'package:flutter/material.dart';
 
 class PasswordRequirementsBox extends StatelessWidget {
